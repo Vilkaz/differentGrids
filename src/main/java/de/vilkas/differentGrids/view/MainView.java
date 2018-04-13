@@ -30,7 +30,11 @@ public class MainView extends UI {
 
     private void handleContactsClick() {
         final Optional<Company> selectedCompany = companyGrid.getSelectedItem();
-        selectedCompany.ifPresent(c -> showContacts(c.getContacts()));
+        if (selectedCompany.isPresent()) {
+            showContacts(selectedCompany.get().getContacts());
+        } else {
+            Notification.show("Please select a Company First");
+        }
     }
 
     private void showContacts(final Collection<Contact> contacts) {
